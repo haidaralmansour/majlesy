@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{% endblock title %}
+{% block content %}
+<div>
+    <h1>Written by: {{comment.creator.user.first_name}}</h1>
+    <p>Content: {{comment.content}}</p>
+    <form action="{% url 'manager-approval' comment.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="add comment"/>
+    </form>
+</div>
+{% endblock content %}

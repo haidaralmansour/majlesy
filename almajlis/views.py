@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CitizenForm, UserSignup, UserLogin, CandidateForm
+from .forms import CitizenForm, UserSignup, UserLogin, CandidateForm, CommentForm, CommentManagerForm
 from django.contrib.auth import login, authenticate, logout
 from .models import Citizen, Candidate, Data_Manager, Data_Creator, Suggestion, Comment, Article, Session
 # Create your views here.
@@ -131,5 +131,64 @@ def logout_view(request):
     logout(request)
     return redirect('success-page')
 
+
+def comment_create(request, session_id):
+    session = Session.objects.get(id=session_id)
+    form = CommentForm()
+    if request.method=="POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            citizen = Citizen.objects.get(user=request.user)
+            comment.creator = citizen
+            comment.session = session
+            comment.save()
+            return redirect('session-list')
+    context = {
+        "form":form,
+        "session":session
+    }
+    return render(request, 'comment_create.html', context)
+
+def manager_approval(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    if Data_Manager.objects.filter(user=request.user).count() != 1 :
+        return redirect('session-list')
+    manager=Data_Manager.objects.get(user=request.user)
+    form = CommentManagerForm(instance = comment)
+    if request.method=="POST":
+        form = CommentManagerForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.approved_by = manager
+            comment.save()
+            return redirect('session-list')
+    context = {
+        "form":form,
+        "comment":comment
+    }
+    return render(request, 'manager_approval.html', context)
+
+def comment_update(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    form = CommentForm(instance = comment)
+    if request.method=="POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect('session-list')
+    context = {
+        "form":form,
+        "comment":comment
+    }
+    return render(request, 'comment_update.html', context)
+
+
+def home(request):
+    context = {
+        "articles": Article.objects.all(),
+        "sessions": Session.objects.all()
+    }
+    return render(request, 'home.html', context)
 
 

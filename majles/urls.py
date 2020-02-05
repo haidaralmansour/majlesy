@@ -21,7 +21,7 @@ from almajlis import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
+    path('',views.home ,name='home'), 
     
     path('session/list/',views.session_list ,name='session-list'),
     path('article/list/',views.article_list ,name='article-list'),
@@ -30,7 +30,10 @@ urlpatterns = [
     path('citizen/create/',views.citizen_create ,name='citizen-create'),
     path('candidate/register/',views.candidate_register ,name='candidate-register'),
     path('candidate/login/',views.candidate_login ,name='candidate-login'),
-    path('candidate/create/',views.candidate_create ,name='candidate-create')
+    path('candidate/create/',views.candidate_create ,name='candidate-create'),
+    path('comment/<int:session_id>/create/',views.comment_create ,name='comment-create'),
+    path('comment/<int:comment_id>/update/',views.comment_update ,name='comment-update'),
+    path('manager/approval/<int:comment_id>/',views.manager_approval ,name='manager-approval')
 
 ]
 

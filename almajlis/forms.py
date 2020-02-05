@@ -6,6 +6,16 @@ class CitizenForm(forms.ModelForm):
         model = Citizen
         exclude = ['user']
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        exclude = ['creator','approved_by','approved','session']
+
+class CommentManagerForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['approved']
+
 class CandidateForm(forms.ModelForm):
     class Meta:
         model = Candidate

@@ -45,6 +45,7 @@ class Suggestion(models.Model):
 
 class Comment(models.Model):
     creator = models.ForeignKey(Citizen, on_delete=models.CASCADE)
+    session = models.ForeignKey(Session, on_delete=models.CASCADE)
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     vote= models.BooleanField(default=True)
