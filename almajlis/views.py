@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CitizenForm, UserSignup, UserLogin, CandidateForm, CommentForm, CommentManagerForm
+from .forms import CitizenForm, UserSignup, UserLogin, CandidateForm, CommentForm, CommentManagerForm, ArticleForm
 from django.contrib.auth import login, authenticate, logout
 from .models import Citizen, Candidate, Data_Manager, Data_Creator, Suggestion, Comment, Article, Session
 # Create your views here.
@@ -16,6 +16,7 @@ def article_list(request):
         "articles":Article.objects.all()
     }
     return render(request, 'article_list.html', context)
+ 
 
 
 def citizen_register(request):
@@ -143,7 +144,7 @@ def comment_create(request, session_id):
             comment.creator = citizen
             comment.session = session
             comment.save()
-            return redirect('session-list')
+            return redirect('session-detail', comment.session.id)
     context = {
         "form":form,
         "session":session
@@ -176,7 +177,7 @@ def comment_update(request, comment_id):
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
             form.save()
-            return redirect('session-list')
+            return redirect('session-detail', comment.session.id)
     context = {
         "form":form,
         "comment":comment
@@ -190,5 +191,74 @@ def home(request):
         "sessions": Session.objects.all()
     }
     return render(request, 'home.html', context)
+
+def comment_delete(request, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    session = comment.session
+    comment.delete()
+    return redirect('session-detail', session.id)
+
+
+def session_detail(request, session_id):
+    session = Session.objects.get(id=session_id)
+    comments = Comment.objects.filter(session=session,approved=True)
+    context = {
+        "session": session,
+        "comments": comments,
+    }
+    return render(request, 'session_detail.html', context)
+   
+
+def article_create(request):
+    form = ArticleForm()
+    if request.method=="POST":
+        form = ArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            article = form.save(commit=False)
+            candidate = Candidate.objects.get(user=request.user)
+            article.creator = candidate
+            article.save()
+            return redirect('article-list')
+    context = {
+        "form":form
+    }
+    return render(request, 'article_create.html', context)    
+
+
+def article_update(request, article_id):
+    article = Article.objects.get(id=article_id)
+    form = ArticleForm(instance = article)
+    if request.method=="POST":
+        form = ArticleForm(request.POST, request.FILES, instance=article)
+        if form.is_valid():
+            form.save()
+            return redirect('article-detail', article.id)
+    context = {
+        "form":form,
+        "article":article
+    }
+    return render(request, 'article_update.html', context)
+
+
+    
+def article_delete(request, article_id):
+    article = Article.objects.get(id=article_id)
+    article.delete()
+    return redirect('article-list')
+
+
+def article_detail(request,article_id):
+    article = Article.objects.get(id=article_id)
+    context = {
+        "article": article
+    }
+    return render(request, 'article_detail.html', context)
+
+
+
+
+  
+
+
 
 

@@ -10,8 +10,10 @@
     <div class="row">
         {% for article in articles %}
         <div class="col-3">
-            <h2>{{article.title}}</h2>
+            <a href="{% url 'article-detail' article.id %}"><h2>{{article.title}}</h2></a>
+            {% if article.image %}
             <img src="{{article.image.url}}"/>
+            {% endif %}
         </div>
         {% endfor %}
     </div>

@@ -24,7 +24,13 @@ urlpatterns = [
     path('',views.home ,name='home'), 
     
     path('session/list/',views.session_list ,name='session-list'),
+    path('session/<int:session_id>/detail/',views.session_detail ,name='session-detail'),
     path('article/list/',views.article_list ,name='article-list'),
+    path('article/<int:article_id>/detail/',views.article_detail ,name='article-detail'),
+    path('article/<int:article_id>/update/',views.article_update ,name='article-update'),
+    path('article/create/',views.article_create ,name='article-create'),
+    path('article/<int:article_id>/delete/',views.article_delete ,name='article-delete'),
+
     path('citizen/register/',views.citizen_register ,name='citizen-register'),
     path('citizen/login/',views.citizen_login ,name='citizen-login'),
     path('citizen/create/',views.citizen_create ,name='citizen-create'),
@@ -33,8 +39,8 @@ urlpatterns = [
     path('candidate/create/',views.candidate_create ,name='candidate-create'),
     path('comment/<int:session_id>/create/',views.comment_create ,name='comment-create'),
     path('comment/<int:comment_id>/update/',views.comment_update ,name='comment-update'),
-    path('manager/approval/<int:comment_id>/',views.manager_approval ,name='manager-approval')
-
+    path('manager/approval/<int:comment_id>/',views.manager_approval ,name='manager-approval'),
+     path('comment/<int:comment_id>/delete/',views.comment_delete ,name='comment-delete'),
 ]
 
 urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

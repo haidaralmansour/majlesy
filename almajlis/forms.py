@@ -34,3 +34,8 @@ class UserSignup(forms.ModelForm):
 class UserLogin(forms.Form):
     username = forms.CharField(required=True)
     password = forms.CharField(required=True, widget=forms.PasswordInput())
+
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        exclude = ['creator']

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{% endblock title %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <h1>Session Created By: {{session.creator.user.first_name}} {{session.creator.user.last_name}}</h1>
+        <h2>News: {{session.description}}</h2>
+        <small>{{session.date}}</small>
+    </div>
+    {% for comment in comments %}
+    <div class="row border-dark">
+        <p>{{comment.creator.user.first_name}} says: {{comment.content}}</p><br>
+        <small>On: {{comment.date}}</small>
+        <a href="{% url 'comment-delete' comment.id %}">Delete</a>
+        {% if comment.creator.user == request.user %}
+        <a href="{% url 'comment-update' comment.id %}" class="btn btn-success">Update</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <div class="row">
+        <a href="{% url 'comment-create' session.id %}">Add Comment</a>
+    </div>
+</div>
+{% endblock content %}
