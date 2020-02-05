@@ -6,11 +6,12 @@
 
 {% block content %}
 <div>
-    <h1>Session List</h1>
+    <h1>Article List</h1>
     <div class="row">
-        {% for session in sessions %}
+        {% for article in articles %}
         <div class="col-3">
-            <h2>{{session.description}}</h2>
+            <h2>{{article.title}}</h2>
+            <img src="{{article.image.url}}"/>
         </div>
         {% endfor %}
     </div>
