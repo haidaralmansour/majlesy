@@ -24,7 +24,13 @@ urlpatterns = [
     
     
     path('session/list/',views.session_list ,name='session-list'),
-    path('article/list/',views.article_list ,name='article-list')    
+    path('article/list/',views.article_list ,name='article-list'),
+    path('citizen/register/',views.citizen_register ,name='citizen-register'),
+    path('citizen/login/',views.citizen_login ,name='citizen-login'),
+    path('citizen/create/',views.citizen_create ,name='citizen-create'),
+    path('candidate/register/',views.candidate_register ,name='candidate-register'),
+    path('candidate/login/',views.candidate_login ,name='candidate-login'),
+    path('candidate/create/',views.candidate_create ,name='candidate-create')
 
 ]
 
