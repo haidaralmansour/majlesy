@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block title %}
 
 {% endblock title %}
 {% block content %}
-<form action="{% url 'session-update' session.id %}" method="POST" enctype="multipart/form-data">
+<form class="mt-5 pt-5 container jumbotron" action="{% url 'session-update' session.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{form}}
+    {{form|crispy}}
     <input type="submit" value="Update session"/>
 </form>
 {% endblock content %}

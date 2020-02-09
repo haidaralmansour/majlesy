@@ -73,7 +73,7 @@ def citizen_login(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('success-page')
+    return redirect('home')
 
 
 def candidate_create(request):
@@ -187,8 +187,8 @@ def comment_update(request, comment_id):
 
 def home(request):
     context = {
-        "articles": Article.objects.all(),
-        "sessions": Session.objects.all()
+        "articles": Article.objects.all()[:4],
+        "sessions": Session.objects.all()[:5]
     }
     return render(request, 'home.html', context)
 

@@ -33,7 +33,7 @@ urlpatterns = [
     path('session/<int:session_id>/delete/',views.session_delete ,name='session-delete'),
     path('session/create/',views.session_create ,name='session-create'),
     path('session/<int:session_id>/update/',views.session_update ,name='session-update'),
-
+    path('logout/',views.logout_view,name='logout'),
 
     path('citizen/register/',views.citizen_register ,name='citizen-register'),
     path('citizen/login/',views.citizen_login ,name='citizen-login'),

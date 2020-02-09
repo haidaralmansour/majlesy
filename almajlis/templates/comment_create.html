@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block title %}
 
 {% endblock title %}
 {% block content %}
-<form class="mt-5 pt-5 " action="{% url 'comment-create' session.id %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit" value="add comment"/>
-</form>
-<small>Your comment will go through an approval process and wont be posted until approved</small>
+<div class="mt-5 pt-5 container">
+
+    <form class=" m-5 jumbotron" class="mt-5 pt-5 " action="{% url 'comment-create' session.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <div class="row">
+            <div class="col-12 align-right text-right">
+
+                <input class="btn btn-success mr-1" type="submit" value="Post Comment"/>
+            </div>
+        </div>
+        <small>Note: Your comment will go through an approval process and wont be posted until approved</small>
+    </form>
+</div>
 {% endblock content %}
