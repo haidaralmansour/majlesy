@@ -30,6 +30,10 @@ urlpatterns = [
     path('article/<int:article_id>/update/',views.article_update ,name='article-update'),
     path('article/create/',views.article_create ,name='article-create'),
     path('article/<int:article_id>/delete/',views.article_delete ,name='article-delete'),
+    path('session/<int:session_id>/delete/',views.session_delete ,name='session-delete'),
+    path('session/create/',views.session_create ,name='session-create'),
+    path('session/<int:session_id>/update/',views.session_update ,name='session-update'),
+
 
     path('citizen/register/',views.citizen_register ,name='citizen-register'),
     path('citizen/login/',views.citizen_login ,name='citizen-login'),
@@ -40,8 +44,12 @@ urlpatterns = [
     path('comment/<int:session_id>/create/',views.comment_create ,name='comment-create'),
     path('comment/<int:comment_id>/update/',views.comment_update ,name='comment-update'),
     path('manager/approval/<int:comment_id>/',views.manager_approval ,name='manager-approval'),
-     path('comment/<int:comment_id>/delete/',views.comment_delete ,name='comment-delete'),
-]
+    path('comment/<int:comment_id>/delete/',views.comment_delete ,name='comment-delete'),
 
+    path('no/access',views.no_access ,name='no-access'),
+    path('unapproved/comments/',views.unapproved_comments ,name='unapproved-comments'),
+    path('mysessions/',views.my_sessions ,name='my_sessions'),
+    path('myarticles/',views.my_articles ,name='my-articles'),
+]
 urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -24,6 +24,7 @@ class Data_Creator(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Session(models.Model):
+    title = models.CharField(max_length=120, blank=True, null=True)
     creator =  models.ForeignKey(Data_Creator, on_delete=models.CASCADE)
     attendees = models.ManyToManyField(Candidate)
     description = models.TextField()

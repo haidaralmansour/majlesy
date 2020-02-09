@@ -1,6 +1,7 @@
 from django import forms
 from .models import Citizen, Candidate, Data_Manager, Data_Creator, Suggestion, Comment, Article, Session
 from django.contrib.auth.models import User 
+
 class CitizenForm(forms.ModelForm):
     class Meta:
         model = Citizen
@@ -39,3 +40,10 @@ class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         exclude = ['creator']
+
+class SessionForm(forms.ModelForm):
+    class Meta:
+        model = Session 
+        exclude = ['creator']
+        
+          

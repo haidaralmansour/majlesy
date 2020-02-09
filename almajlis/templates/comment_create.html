@@ -3,9 +3,10 @@
 
 {% endblock title %}
 {% block content %}
-<form action="{% url 'comment-create' session.id %}" method="POST" enctype="multipart/form-data">
+<form class="mt-5 pt-5 " action="{% url 'comment-create' session.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{form}}
     <input type="submit" value="add comment"/>
 </form>
+<small>Your comment will go through an approval process and wont be posted until approved</small>
 {% endblock content %}

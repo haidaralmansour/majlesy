@@ -163,7 +163,7 @@ def manager_approval(request, comment_id):
             comment = form.save(commit=False)
             comment.approved_by = manager
             comment.save()
-            return redirect('session-list')
+            return redirect('unapproved-comments')
     context = {
         "form":form,
         "comment":comment
@@ -202,9 +202,11 @@ def comment_delete(request, comment_id):
 def session_detail(request, session_id):
     session = Session.objects.get(id=session_id)
     comments = Comment.objects.filter(session=session,approved=True)
+    suggestions = Suggestion.objects.filter(session=session)
     context = {
         "session": session,
         "comments": comments,
+        "suggestions":suggestions
     }
     return render(request, 'session_detail.html', context)
    
@@ -253,6 +255,83 @@ def article_detail(request,article_id):
         "article": article
     }
     return render(request, 'article_detail.html', context)
+
+
+def session_create(request):
+    form = sessionForm()
+    if request.method=="POST":
+        form = sesionForm(request.POST, request.FILES)
+        if form.is_valid():
+            session = form.save(commit=False)
+            data_creator = Data_Creator.objects.get(user=request.user)
+            session.creator = data_creator
+            session.save()
+            return redirect('session-list')
+    context = {
+        "form":form
+    }
+    return render(request, 'session_create.html', context)
+
+
+def session_update(request, session_id):
+    session = session.objects.get(id=session_id)
+    form = sessionForm(instance = session)
+    if request.method=="POST":
+        form = sessionForm(request.POST, request.FILES, instance=session)
+        if form.is_valid():
+            form.save()
+            return redirect('session-detail', session.id)
+    context = {
+        "form":form,
+        "session":session
+    }
+    return render(request, 'session_update.html', context)
+
+
+def session_delete(request, session_id):
+    session = session.objects.get(id=session_id)
+    session.delete()
+    return redirect('session-list')
+
+def no_access(request):
+    return render(request, 'no_access.html')
+
+def my_articles(request):
+    if Candidate.objects.filter(user=request.user).count() != 1:
+        return redirect('no-access')
+    candidate= Candidate.objects.get(user=request.user)
+    articles = Article.objects.filter(creator=candidate)
+    context={
+        "articles":articles
+    }
+    return render(request, "my_articles.html", context)
+
+def my_sessions(request):
+    if Data_Creator.objects.filter(user=request.user).count() != 1:
+        return redirect('no-access')
+    data_creator= Data_Creator.objects.get(user=request.user)
+    sessions = Session.objects.filter(creator=data_creator)
+    context={
+        "sessions":sessions
+    }
+    return render(request, "my_sessions.html", context)
+
+def unapproved_comments(request):
+    comments =  Comment.objects.filter(approved=False)
+    context={
+        "comments":comments
+    }
+    return render(request, "unapproved_comments.html", context)
+  
+
+
+
+
+
+
+
+
+
 
 
 

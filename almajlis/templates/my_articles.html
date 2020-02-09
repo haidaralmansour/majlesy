@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block content %}
+<div>
+    <h1>My Article List</h1>
+    <div class="row">
+        {% for article in articles %}
+        <div class="col-3">
+            <a href="{% url 'my-articles' article.id %}"><h2>{{article.title}}</h2></a>
+            {% if article.image %}
+            <img src="{{article.image.url}}"/>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

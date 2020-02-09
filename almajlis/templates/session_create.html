@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{% endblock title %}
+{% block content %}
+<form action="{% url 'session-create' session.id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="add session"/>
+</form>
+{% endblock content %}

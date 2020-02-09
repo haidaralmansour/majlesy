@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{% endblock title %}
+{% block content %}
+<ul class="list-group">
+    {% for comment in comments %}
+    <li class="list-group-item">{{comment.creator.user.first_name}} {{comment.creator.user.last_name}} says: {{comment.content}} <small>{{comment.date}} {{comment.vote}}</small> <a href="{% url 'manager-approval' comment.id%}" class="btn btn-danger">Approve</a></li>
+   {% endfor %}
+  </ul>
+{% endblock content %}
