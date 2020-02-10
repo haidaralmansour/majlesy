@@ -58,7 +58,7 @@
           <li><a href="{% url 'session-list' %}">Sessions</a></li>
           <li><a href="{% url 'article-list' %}">Articles</a></li>
           {% if request.user.is_authenticated %}
-          <li><a href="#contact">Profile</a></li>
+          <li><a href="{% url 'profile' %}">Profile</a></li>
           <li><a href="{% url 'logout' %}">Logout ({{request.user.username}})</a></li>
           {% else %}
           <li><a href="{% url 'citizen-login' %}">Login</a></li>

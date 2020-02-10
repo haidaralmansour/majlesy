@@ -18,7 +18,7 @@
     </div>
     <div class="col-12">
         <h3>Attendees:</h3>
-        <table class="table  table-dark">
+        <table class="table  table-light light-light">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -41,7 +41,7 @@
 
     <div class="col-12">
         <h3>Suggestions:</h3>
-        <table class="table table-borderless table-dark">
+        <table class="table table-borderless table-light light-light">
             <thead>
               <tr>
                 <th scope="col">Title</th>
@@ -67,7 +67,7 @@
     <h3>comments:</h3>
     <ul class="list-group">
         {% for comment in comments %}
-        <li class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
+        <li class="list-group-item list-group-item- light-light d-flex justify-content-between align-items-center">
           {{comment.creator.user.first_name}} {{comment.creator.user.last_name}} says: {{comment.content}}
           <span class="badge badge-primary badge-pill">{% if comment.vote == True %}Voted: Yes{% else %}Voted: No{% endif %}</span>
         </li>

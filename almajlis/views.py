@@ -302,6 +302,35 @@ def session_delete(request, session_id):
 def no_access(request):
     return render(request, 'no_access.html')
 
+def candidate_profile(request):
+    if Candidate.objects.filter(user=request.user).count() != 1:
+        return redirect('no-access')
+    candidate= Candidate.objects.get(user=request.user)
+    articles = Article.objects.filter(creator=candidate)
+    context={
+        "profile":candidate,
+        "articles":articles
+    }
+    return render(request, "candidate_profile.html", context)
+
+def citizen_profile(request):
+    if Citizen.objects.filter(user=request.user).count() != 1:
+        return redirect('no-access')
+    citizen = Citizen.objects.get(user=request.user)
+    context={
+        "profile":citizen
+    }
+    return render(request, "citizen_profile.html", context)
+
+def profile(request):
+    if Citizen.objects.filter(user=request.user).count() == 1:
+        return redirect('citizen-profile')
+    elif Candidate.objects.filter(user=request.user).count() == 1:
+        return redirect('candidate-profile')
+    else:
+        return redirect('no-access')
+    
+
 def my_articles(request):
     if Candidate.objects.filter(user=request.user).count() != 1:
         return redirect('no-access')

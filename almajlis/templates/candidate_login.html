@@ -4,9 +4,15 @@
 
 {% endblock title %}
 {% block content %}
-<form class="mt-5 pt-5 container jumbotron" action="{% url 'candidate-login' %}" method="POST" enctype="multipart/form-data">
+<div class="container jumbotron" style="margin-top: 200px ;">
+    <div class="row">
+        <div class="col-12">
+<form class="" action="{% url 'candidate-login' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{form|crispy}}
     <input type="submit" value="login"/>
 </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}

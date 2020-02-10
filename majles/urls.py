@@ -51,6 +51,9 @@ urlpatterns = [
     path('mysessions/',views.my_sessions ,name='my_sessions'),
     path('myarticles/',views.my_articles ,name='my-articles'),
     path('candidates/',views.candidate_list ,name='candidate-list'),
+    path('candidate/profile/',views.candidate_profile ,name='candidate-profile'),
+    path('citizen/profile/',views.citizen_profile ,name='citizen-profile'),
+    path('profile/',views.profile ,name='profile'),
 ]
 urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

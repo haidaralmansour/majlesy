@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Profile
+{% endblock title %}
+
+{% block content %}
+<div class="container mt-5 p-5">
+    <div class="row pt-5 bg-light text-center align-center">
+        <div class="col-12">
+
+                    <h1>{{profile.user.first_name}} {{profile.user.last_name}}'s Profile</h1>
+   
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-6 text-right align-right ">
+          
+            <img src="{{profile.image.url}}" alt="{{profile.user.first_name}} {{profile.user.last_name}}" class="img-thumbnail">
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body bg-light">
+                <div class="row">
+                    <div class="col-6 text-left align-left">
+                        <h2>Details</h2>
+                    </div>
+                    <div class="col-6 text-right align-right">
+                        <a  class="btn btn-info" style="color:white">Update</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+
+                        <h3>Date of Birth: {{profile.dob}}</h3>
+                        <h3>Civil ID Number: {{profile.civil_no}}</h3>
+                        <h3>Phone Number: {{profile.phone}}</h3>
+                    </div>
+                </div>
+                </div>
+              </div>
+        </div>
+    </div>
+   
+</div>
+{% endblock content %}

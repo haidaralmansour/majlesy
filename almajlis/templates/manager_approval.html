@@ -4,13 +4,17 @@
 
 {% endblock title %}
 {% block content %}
-<div>
+<div class="container jumbotron" style="margin-top: 200px ;">
+    <div class="row">
+        <div class="col-12">
     <h1>Written by: {{comment.creator.user.first_name}}</h1>
     <p>Content: {{comment.content}}</p>
-    <form class="mt-5 pt-5 container jumbotron" action="{% url 'manager-approval' comment.id %}" method="POST" enctype="multipart/form-data">
+    <form class="" action="{% url 'manager-approval' comment.id %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{form|crispy}}
         <input type="submit" value="add comment"/>
     </form>
+        </div>
+    </div>
 </div>
 {% endblock content %}

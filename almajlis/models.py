@@ -8,6 +8,7 @@ class Citizen(models.Model):
     civil_no = models.IntegerField(null=True)
     phone =  models.IntegerField()
     civil_image = models.ImageField(null=True)
+    image = models.ImageField(null=True,blank=True)
 
 class Candidate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

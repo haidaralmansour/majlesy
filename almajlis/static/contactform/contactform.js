@@ -98,7 +98,7 @@ jQuery(document).ready(function($) {
       type: "POST",
       url: action,
       data: str,
-      success: function(msg) {
+      info: function(msg) {
         // alert(msg);
         if (msg == 'OK') {
           $("#sendmessage").addClass("show");

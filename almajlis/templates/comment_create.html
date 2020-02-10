@@ -4,18 +4,22 @@
 
 {% endblock title %}
 {% block content %}
-<div class="mt-5 pt-5 container">
+<div class="container jumbotron" style="margin-top: 200px ;">
+    <div class="row">
+        <div class="col-12">
 
-    <form class=" m-5 jumbotron" class="mt-5 pt-5 " action="{% url 'comment-create' session.id %}" method="POST" enctype="multipart/form-data">
+    <form  action="{% url 'comment-create' session.id %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{form|crispy}}
         <div class="row">
             <div class="col-12 align-right text-right">
 
-                <input class="btn btn-success mr-1" type="submit" value="Post Comment"/>
+                <input class="btn btn-info mr-1" type="submit" value="Post Comment"/>
             </div>
         </div>
         <small>Note: Your comment will go through an approval process and wont be posted until approved</small>
     </form>
+        </div>
+    </div>
 </div>
 {% endblock content %}

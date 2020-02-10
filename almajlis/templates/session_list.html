@@ -31,11 +31,11 @@
               <div class="card mb-5 mb-lg-0">
                 <div class="card-body">
                   <h5 class="card-title text-muted text-uppercase text-center">{{session.date}}</h5>
-                  <h6 class="card-price text-center" style="color: #92AD94;">{{session.title}}</h6>
+                  <h6 class="card-price text-center" style="color: #065172;">{{session.title}}</h6>
                   <hr>
                   <ul class="fa-ul">
-                    <li class="session-card"  style="color: #92AD94;">{{session.description}}</li>
-                    <li class="session-card"  style="color: #92AD94;">Attendees: {{session.attendees.count}}</li>
+                    <li class="session-card"  style="color: #065172;">{{session.description}}</li>
+                    <li class="session-card"  style="color: #065172;">Attendees: {{session.attendees.count}}</li>
                   </ul>
                   <hr>
                   <div class="text-center">
@@ -59,27 +59,7 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
-                <form method="POST" action="#">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="your-name" placeholder="Your Name">
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="your-email" placeholder="Your Email">
-                  </div>
-                  <div class="form-group">
-                    <select id="ticket-type" name="ticket-type" class="form-control" >
-                      <option value="">-- Select Your Ticket Type --</option>
-                      <option value="standard-access">Standard Access</option>
-                      <option value="pro-access">Pro Access</option>
-                      <option value="premium-access">Premium Access</option>
-                    </select>
-                  </div>
-                  <div class="text-center">
-                    <button type="submit" class="btn">Buy Now</button>
-                  </div>
-                </form>
-              </div>
+
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
