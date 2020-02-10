@@ -5,6 +5,12 @@ from .models import Citizen, Candidate, Data_Manager, Data_Creator, Suggestion, 
 # Create your views here.
 
 
+def candidate_list(request):
+    context ={
+        "candidates": Candidate.objects.all()
+    }
+    return render(request,'candidate_list.html', context)
+
 def session_list(request):
     context = {
         "sessions":Session.objects.all()
@@ -130,7 +136,7 @@ def candidate_login(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('success-page')
+    return redirect('home')
 
 
 def comment_create(request, session_id):

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block content %}
+    <!--==========================
+      Speakers Section
+    ============================-->
+    <section id="speakers" class="wow fadeInUp">
+        <div class="container">
+          <div class="section-header">
+            <h2>Event Speakers</h2>
+            <p>Here are some of our speakers</p>
+          </div>
+  
+          <div class="row">
+              {% for candidate in candidates %}
+            <div class="col-lg-4 col-md-6">
+              <div class="speaker">
+                  {% if candidate.image %}
+                <img src="{{candidate.image.url}}" alt="{{candidate.user.first_name}}" class="img-fluid">
+                {% endif %}
+                <div class="details">
+                  <h3><a href="speaker-details.html">{{candidate.user.first_name}} {{candidate.user.last_name}}</a></h3>
+                  <p>Experience: {{candidate.years_of_experience}} years</p>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+  
+      </section>
+{% endblock content %}

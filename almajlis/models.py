@@ -16,6 +16,7 @@ class Candidate(models.Model):
     university =  models.CharField(max_length=120)
     years_of_experience = models.IntegerField()
     civil_image = models.ImageField(null=True)
+    image = models.ImageField(null=True, blank=True)
 
 class Data_Manager(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -3,7 +3,7 @@
 
 {% endblock title %}
 {% block content %}
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row">
         <h1>Article Created By: {{ article.creator.user.first_name}} {{article.creator.user.last_name}}</h1>
         <h2>News: {{article.description}}</h2>
@@ -16,5 +16,52 @@
         <a href="{% url 'article-delete' article.id %}">Delete article</a>
     </div>
     {% endif %}
-</div>
+</div> -->
+<div class="container-fluid mt-5">
+    <div class="row pt-5">
+        <div class="col-12">
+            <h1 class="section-header text-center align-center">{{article.title}}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center align-center mx-auto">
+            <img src="{{article.image.url}}" width="700px">
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div class="row mt-2 ">
+
+                <div class="col-6 text-left align-left">
+                    <h6>Created By: {{article.creator.user.first_name}} {{article.creator.user.last_name}}</h6>
+                </div>
+                <div class="col-6 text-right align-right">
+                    <h6>
+                        {{article.date_of_article}}
+                    </h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <div class="row jumbotron bg-dark" style="margin:50px 200px">
+        <div class="col-12 text-center align-center">
+            <h4 >{{article.description}}</h4>
+        </div>
+    </div>
+   {% if article.creator.user == request.user %}
+    <div class="row">
+        <div class="col-12  text-center align-center mx-auto">
+
+            <ul class="">
+                <li class="btn btn-outline-success"><a href="{% url 'article-update' article.id %}">Update article</a>
+                   </li>
+                    <li class="btn btn-outline-success">
+                        <a href="{% url 'article-delete' article.id %}">Delete article</a></li>
+            </ul>
+        </div>
+    </div>
+      {% endif %}
+    </div>
 {% endblock content %}

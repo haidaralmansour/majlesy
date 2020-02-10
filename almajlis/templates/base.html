@@ -54,7 +54,7 @@
         <ul class="nav-menu">
           <li class="menu-active"><a href="{% url 'home' %}">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#speakers">Candidates</a></li>
+          <li><a href="{% url 'candidate-list' %}">Candidates</a></li>
           <li><a href="{% url 'session-list' %}">Sessions</a></li>
           <li><a href="{% url 'article-list' %}">Articles</a></li>
           {% if request.user.is_authenticated %}
@@ -64,7 +64,6 @@
           <li><a href="{% url 'citizen-login' %}">Login</a></li>
           <li><a href="{% url 'citizen-register' %}">Sign Up</a></li>
           {% endif%}
-          <li class="buy-tickets"><a href="#buy-tickets">Buy Tickets</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
 

@@ -12,7 +12,7 @@ Majlesy
     <div class="intro-container  ">
       <h1 class="mb-4 pb-0">Get the news<br><span>From</span> The source</h1>
       <p class="mb-4 pb-0">The official platform for news of the National Assembly</p>
-      <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video"
+      <a href="https://www.youtube.com/watch?v=J6eJXyM_h4k" class="venobox play-btn mb-4" data-vbtype="video"
         data-autoplay="true"></a>
       <a href="#about" class="about-btn scrollto">About The Event</a>
     </div>
@@ -77,6 +77,7 @@ Majlesy
           <div class="row">
   
             {% for article in articles %}
+            <a href="{% url 'article-detail' article.id %}">
             <div class="col-lg-4 col-md-6">
               <div class="hotel">
                 <div class="hotel-img">
@@ -92,10 +93,10 @@ Majlesy
                   <i class="fa fa-star"></i>
                   <i class="fa fa-star"></i>
                 </div> -->
-                <p>{{article.description}}</p>
+                <h6 class="ml-3">By: {{article.creator.user.first_name}} {{article.creator.user.last_name}}</h6>
               </div>
             </div>
-  
+            </a>
             {% endfor %}
   
           </div>
