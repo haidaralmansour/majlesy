@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CitizenForm, UserSignup, UserLogin, CandidateForm, CommentForm, CommentManagerForm, ArticleForm
+from .forms import CitizenForm, UserSignup, UserLogin, CandidateForm, CommentForm, CommentManagerForm, ArticleForm, SessionForm
 from django.contrib.auth import login, authenticate, logout
 from .models import Citizen, Candidate, Data_Manager, Data_Creator, Suggestion, Comment, Article, Session
 # Create your views here.
@@ -264,9 +264,9 @@ def article_detail(request,article_id):
 
 
 def session_create(request):
-    form = sessionForm()
+    form = SessionForm()
     if request.method=="POST":
-        form = sesionForm(request.POST, request.FILES)
+        form = SesionForm(request.POST, request.FILES)
         if form.is_valid():
             session = form.save(commit=False)
             data_creator = Data_Creator.objects.get(user=request.user)
