@@ -38,9 +38,11 @@ urlpatterns = [
     path('citizen/register/',views.citizen_register ,name='citizen-register'),
     path('citizen/login/',views.citizen_login ,name='citizen-login'),
     path('citizen/create/',views.citizen_create ,name='citizen-create'),
+    path('citizen/update/',views.citizen_update ,name='citizen-update'),
     path('candidate/register/',views.candidate_register ,name='candidate-register'),
     path('candidate/login/',views.candidate_login ,name='candidate-login'),
     path('candidate/create/',views.candidate_create ,name='candidate-create'),
+    path('candidate/update/',views.candidate_update ,name='candidate-update'),
     path('comment/<int:session_id>/create/',views.comment_create ,name='comment-create'),
     path('comment/<int:comment_id>/update/',views.comment_update ,name='comment-update'),
     path('manager/approval/<int:comment_id>/',views.manager_approval ,name='manager-approval'),
@@ -48,12 +50,17 @@ urlpatterns = [
 
     path('no/access',views.no_access ,name='no-access'),
     path('unapproved/comments/',views.unapproved_comments ,name='unapproved-comments'),
-    path('mysessions/',views.my_sessions ,name='my_sessions'),
+    path('mysessions/',views.my_sessions ,name='my-sessions'),
     path('myarticles/',views.my_articles ,name='my-articles'),
     path('candidates/',views.candidate_list ,name='candidate-list'),
     path('candidate/profile/',views.candidate_profile ,name='candidate-profile'),
     path('citizen/profile/',views.citizen_profile ,name='citizen-profile'),
     path('profile/',views.profile ,name='profile'),
+    path('about/',views.about ,name='about'),
+    path('suggestion/<int:session_id>/create/',views.suggestion_create ,name='suggestion-create'),
+    path('suggestion/<int:suggestion_id>/update/',views.suggestion_update ,name='suggestion-update'),
+    path('suggestion/<int:suggestion_id>/delete/',views.suggestion_delete ,name='suggestion-delete'),
+    path('candidate/<int:candidate_id>/profile/', views.visit_profile, name='visit')
 ]
 urlpatterns+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

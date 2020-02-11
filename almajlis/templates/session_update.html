@@ -14,5 +14,47 @@
 </form>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+              <div class="col-6 text-left align-left">
+                <h3>Suggestions:</h3>
+              </div>
+              <div class="col-6 text-right align-right">
+               
+                <a  class="btn btn-info" href="{% url 'suggestion-create' session.id %}">
+                  Add Suggestion
+                </a>
+               
+              </div>
+            </div>
+              
+      
+              <table class="table table-borderless table-light light-light">
+                  <thead>
+                    <tr>
+                      <th scope="col">Title</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Votes</th>
+                     
+                      <th scope="col">Actions</th>
+               
+                    </tr>
+                  </thead>
+                  <tbody>
+                   {% for suggestion in suggestions %}
+                   <tr>
+                      <th scope="row">{{suggestion.title}} </th>
+                      <td>{{suggestion.description}}</td>
+                      <td>{{suggestion.vote}}/{{session.attendees.count}}</td>
+                     
+                      <td><a class="btn btn-outline-info mr-2" href="{% url 'suggestion-update' suggestion.id %}">Update</a> <a class="btn btn-outline-info ml-2" href="{% url 'suggestion-delete' suggestion.id %}">Delete</a> </td>
+               
+                    </tr>
+                   {% endfor %}
+                  </tbody>
+                </table>
+          </div>
+    </div>
 </div>
 {% endblock content %}

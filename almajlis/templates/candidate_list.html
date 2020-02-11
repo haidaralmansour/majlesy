@@ -18,21 +18,24 @@
           <div class="row">
               {% for candidate in candidates %}
             <div class="col-lg-4 col-md-6">
-              <div class="speaker">
-                  {% if candidate.image %}
-                <img src="{{candidate.image.url}}" alt="{{candidate.user.first_name}}" class="img-fluid">
-                {% endif %}
-                <div class="details">
-                  <h3><a href="speaker-details.html">{{candidate.user.first_name}} {{candidate.user.last_name}}</a></h3>
-                  <p>Experience: {{candidate.years_of_experience}} years</p>
-                  <div class="social">
-                    <a href=""><i class="fa fa-twitter"></i></a>
-                    <a href=""><i class="fa fa-facebook"></i></a>
-                    <a href=""><i class="fa fa-google-plus"></i></a>
-                    <a href=""><i class="fa fa-linkedin"></i></a>
+              <a href="{% url 'visit' candidate.id %}">
+
+                <div class="speaker">
+                    {% if candidate.image %}
+                  <img src="{{candidate.image.url}}" alt="{{candidate.user.first_name}}" class="img-fluid">
+                  {% endif %}
+                  <div class="details">
+                    <h3><a href="{% url 'visit' candidate.id %}">{{candidate.user.first_name}} {{candidate.user.last_name}}</a></h3>
+                    <p>Experience: {{candidate.years_of_experience}} years</p>
+                    <div class="social">
+                      <a href=""><i class="fa fa-twitter"></i></a>
+                      <a href=""><i class="fa fa-facebook"></i></a>
+                      <a href=""><i class="fa fa-google-plus"></i></a>
+                      <a href=""><i class="fa fa-linkedin"></i></a>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
             {% endfor %}
           </div>

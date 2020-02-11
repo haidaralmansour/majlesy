@@ -53,12 +53,12 @@
       <nav id="nav-menu-container">
         <ul class="nav-menu">
           <li class="menu-active"><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="#about">About</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
           <li><a href="{% url 'candidate-list' %}">Candidates</a></li>
           <li><a href="{% url 'session-list' %}">Sessions</a></li>
           <li><a href="{% url 'article-list' %}">Articles</a></li>
           {% if request.user.is_authenticated %}
-          <li><a href="{% url 'profile' %}">Profile</a></li>
+          <li><a href="{% url 'profile' %}">Dashboard</a></li>
           <li><a href="{% url 'logout' %}">Logout ({{request.user.username}})</a></li>
           {% else %}
           <li><a href="{% url 'citizen-login' %}">Login</a></li>

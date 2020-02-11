@@ -5,14 +5,49 @@
 {% endblock title %}
 
 {% block content %}
-<div>
-    <h1>My Sessions</h1>
-    <div class="row">
-        {% for session in sessions %}
-        <div class="col-3">
-            <h2>{{session.description}}</h2>
+<div class="container mt-5 p-5">
+    <div class="row pt-5 bg-light text-center align-center">
+        <div class="col-12">
+
+                    <h1>{{profile.user.first_name}} {{profile.user.last_name}}'s Dashboard</h1>
+   
         </div>
-        {% endfor %}
     </div>
+<div class="row mt-3">
+    <div class="col-12 text-right align-right">
+        <a href="{% url 'session-create' %}" class="btn btn-info">Add Session</a>
+        </div>
+</div>
+<div class="row mt-3">
+    <div class="col-12 text-center align-center">
+        <table class="table table-light light-light table-md-responsive">
+            <thead>
+              <tr>
+                <th scope="col">Session ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Date Posted</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for session in sessions %}
+
+
+                    <tr>
+                      
+                      <th scope="row"><a href="{% url 'session-detail' session.id %}">{{session.id}}</a></th>
+                      <td><a href="{% url 'session-detail' session.id %}">
+                    {{session.title}}</a></td>
+                      <td>{{session.date}}</td>
+                      <td><a href="{% url 'session-update' session.id %}" class="btn btn-info mr-2">Update</a> <a href="{% url 'session-delete' session.id %}" class="btn btn-info">Delete</a>  </td>
+                    </tr>
+         
+              {% endfor %}
+           
+            </tbody>
+          </table>
+          
+    </div>
+</div>
 </div>
 {% endblock content %}

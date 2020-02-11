@@ -4,7 +4,7 @@
 {% endblock title %}
 {% block content %}
 
-<div class="container-fluid mt-5">
+<div class="container-fluid my-5">
     <div class="row p-5">
         <div class="col-12">
             <h1 class="section-header text-center align-center">{{session.title}}</h1>
@@ -29,9 +29,9 @@
             <tbody>
                 {% for attender in session.attendees.all %}
               <tr>
-                <th scope="row">{{attender.id}}</th>
-                <td>{{attender.user.first_name}}</td>
-                <td>{{attender.user.last_name}}</td>
+                <th scope="row"><a href="{% url 'visit' attender.id %}" >{{attender.id}}</a></th>
+                <td><a href="{% url 'visit' attender.id %}" >{{attender.user.first_name}}</a></td>
+                <td><a href="{% url 'visit' attender.id %}" >{{attender.user.last_name}}</a></td>
   
               </tr>
               {% endfor %}
@@ -40,13 +40,29 @@
     </div>
 
     <div class="col-12">
-        <h3>Suggestions:</h3>
+      <div class="row">
+        <div class="col-6 text-left align-left">
+          <h3>Suggestions:</h3>
+        </div>
+        <div class="col-6 text-right align-right">
+          {% if creator %}
+          <a  class="btn btn-info" href="{% url 'suggestion-create' session.id %}">
+            Add Suggestion
+          </a>
+          {% endif %}
+        </div>
+      </div>
+        
+
         <table class="table table-borderless table-light light-light">
             <thead>
               <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>
                 <th scope="col">Votes</th>
+                {% if creator %}
+                <th scope="col">Actions</th>
+          {% endif %}
               </tr>
             </thead>
             <tbody>
@@ -55,6 +71,9 @@
                 <th scope="row">{{suggestion.title}} </th>
                 <td>{{suggestion.description}}</td>
                 <td>{{suggestion.vote}}/{{session.attendees.count}}</td>
+                {% if creator %}
+                <td><a class="btn btn-outline-info mr-2" href="{% url 'suggestion-update' suggestion.id %}">Update</a> <a class="btn btn-outline-info ml-2" href="{% url 'suggestion-delete' suggestion.id %}">Delete</a> </td>
+          {% endif %}
               </tr>
              {% endfor %}
             </tbody>
@@ -64,19 +83,27 @@
 
 
 <div class="col-12">
-    <h3>comments:</h3>
-    <ul class="list-group">
-        {% for comment in comments %}
-        <li class="list-group-item list-group-item- light-light d-flex justify-content-between align-items-center">
-          {{comment.creator.user.first_name}} {{comment.creator.user.last_name}} says: {{comment.content}}
-          <span class="badge badge-primary badge-pill">{% if comment.vote == True %}Voted: Yes{% else %}Voted: No{% endif %}</span>
-        </li>
-        {% endfor %}
-       
-      </ul>
+  <div class="row">
+      <h3>comments:</h3>
+      <ul class="list-group">
+          {% for comment in comments %}
+          <li class="list-group-item list-group-item- light-light d-flex justify-content-between align-items-center">
+            {{comment.creator.user.first_name}} {{comment.creator.user.last_name}} says: {{comment.content}}
+            <span class="badge badge-primary badge-pill">{% if comment.vote == True %}Voted: With{% else %}Voted: Against{% endif %}</span>
+          </li>
+          {% endfor %}
+         
+        </ul>
+  </div>
 </div>
-<div class="col-12 text-center align-center mx-auto mt-5">
-    <a href="{% url 'comment-create' session.id %}" class="btn btn-outline-danger ">Comment/Vote</a>
+{% if citizen %}
+
+<div class="row">
+
+  <div class="col-12 text-center align-center mx-auto mt-5">
+      <a href="{% url 'comment-create' session.id %}" class="btn btn-outline-danger ">Comment/Vote</a>
+  </div>
 </div>
+{% endif %}
 </div>
 {% endblock content %}

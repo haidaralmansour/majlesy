@@ -24,17 +24,24 @@
             <h2>Sessions</h2>
             <p>Description here </p>
           </div>
+          {% if creator %}
+          <div class="row">
+            <div class="col-12 text-right align-right">
+              <a href="{% url 'session-create' %}" class="btn btn-info">Add Session</a>
+            </div>
+          </div>
+          {% endif %}
   
           <div class="row">
             {% for session in sessions %}
-            <div class="col-lg-4">
+            <div class="col-lg-4 mt-3">
               <div class="card mb-5 mb-lg-0">
                 <div class="card-body">
                   <h5 class="card-title text-muted text-uppercase text-center">{{session.date}}</h5>
                   <h6 class="card-price text-center" style="color: #065172;">{{session.title}}</h6>
                   <hr>
                   <ul class="fa-ul">
-                    <li class="session-card"  style="color: #065172;">{{session.description}}</li>
+                    <li class="session-card"  style="color: #065172;">{{session.description|slugify|slice:"0:25"}} ...</li>
                     <li class="session-card"  style="color: #065172;">Attendees: {{session.attendees.count}}</li>
                   </ul>
                   <hr>

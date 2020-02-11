@@ -3,9 +3,84 @@
 
 {% endblock title %}
 {% block content %}
-<ul class="list-group">
-    {% for comment in comments %}
-    <li class="list-group-item">{{comment.creator.user.first_name}} {{comment.creator.user.last_name}} says: {{comment.content}} <small>{{comment.date}} {{comment.vote}}</small> <a href="{% url 'manager-approval' comment.id%}" class="btn btn-danger">Approve</a></li>
-   {% endfor %}
-  </ul>
+<div class="container-fluid mt-5">
+  <div class="row p-5">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-6 text-left align-left">
+          <h3>Not Approved:</h3>
+        </div>
+
+      </div>
+        
+
+        <table class="table table-borderless table-light light-light">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Creator</th>
+                <th scope="col">Session</th>
+                <th scope="col">Content</th>
+                <th scope="col">Vote</th>
+                <th scope="col">Date</th>
+                <th scope="col">Action</th>
+
+              </tr>
+            </thead>
+            <tbody>
+             {% for comment in not_approved %}
+             <tr>
+                <th scope="row">{{comment.id}} </th>
+                <td>{{comment.creator.user.first_name}} {{comment.creator.user.last_name}}</td>
+                <td>{{comment.session.title}}</td>
+                <td>{{comment.content}}</td>
+                <td>{% if comment.vote %} With {% else %} Against {% endif %}</td>
+                <td>{{comment.date}}</td>
+                <td><a class="btn btn-outline-info mr-2" href="{% url 'manager-approval' comment.id %}">Approve/Disapprove</a>  </td>
+      
+              </tr>
+             {% endfor %}
+            </tbody>
+          </table>
+    </div>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-6 text-left align-left">
+          <h3>Approved:</h3>
+        </div>
+
+      </div>
+        
+
+        <table class="table table-borderless table-light light-light">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Creator</th>
+                <th scope="col">Session</th>
+                <th scope="col">Content</th>
+                <th scope="col">Vote</th>
+                <th scope="col">Date</th>
+                <th scope="col">Action</th>
+
+              </tr>
+            </thead>
+            <tbody>
+             {% for comment in comments %}
+             <tr>
+                <th scope="row">{{comment.id}} </th>
+                <td>{{comment.creator.user.first_name}} {{comment.creator.user.last_name}}</td>
+                <td>{{comment.session.title}}</td>
+                <td>{{comment.content}}</td>
+                <td>{% if comment.vote %} With {% else %} Against {% endif %}</td>
+                <td>{{comment.date}}</td>
+                <td><a class="btn btn-outline-info mr-2" href="{% url 'manager-approval' comment.id %}">Approve/Disapprove</a>  </td>
+      
+              </tr>
+             {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+</div>
 {% endblock content %}

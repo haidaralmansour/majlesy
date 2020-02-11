@@ -25,9 +25,6 @@ My Profile
                     <div class="col-6 text-left align-left">
                         <h2>Details</h2>
                     </div>
-                    <div class="col-6 text-right align-right">
-                        <a href="{% url 'candidate-update' %}" class="btn btn-info" style="color: white;">Update</a>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -42,11 +39,7 @@ My Profile
               </div>
         </div>
     </div>
-    <div class="row mt-3">
-        <div class="col-12 text-right align-right">
-            <a href="{% url 'article-create' %}" class="btn btn-info">Add Article</a>
-            </div>
-    </div>
+
     <div class="row mt-3">
         <div class="col-12 text-center align-center">
             <table class="table table-light light-light table-md-responsive">
@@ -55,7 +48,6 @@ My Profile
                     <th scope="col">Article ID</th>
                     <th scope="col">Title</th>
                     <th scope="col">Date Posted</th>
-                    <th scope="col">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -64,7 +56,6 @@ My Profile
                     <th scope="row"><a href="{% url 'article-detail' article.id %}"> {{article.id}}</a></th>
                     <td><a href="{% url 'article-detail' article.id %}"> {{article.title}}</a></td>
                     <td>{{article.date_posted}}</td>
-                    <td><a href="{% url 'article-update' article.id %}" class="btn btn-info mr-2">Update</a> <a href="{% url 'article-delete' article.id %}" class="btn btn-info">Delete</a>  </td>
                   </tr>
                   {% endfor %}
                

@@ -16,6 +16,13 @@
             <h2>Articles</h2>
             <p>Here are some of the latest Articles</p>
           </div>
+          {% if creator %}
+          <div class="row">
+            <div class="col-12 text-right align-right">
+              <a href="{% url 'article-create' %}" class="btn btn-info">Add Article</a>
+            </div>
+          </div>
+          {% endif %}
   
           <div class="row">
   
